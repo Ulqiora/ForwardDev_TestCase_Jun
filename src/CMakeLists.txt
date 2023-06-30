@@ -16,6 +16,6 @@ target_compile_options(tutorial_compiler_flags INTERFACE
   "$<${msvc_cxx}:-W3>"
 )
 
-add_subdirectory(model/Config)
-list(APPEND EXTRA_LIBS Config)
-target_link_libraries(main PRIVATE ${EXTRA_LIBS} tutorial_compiler_flags)
+add_subdirectory(model)
+list(APPEND EXTRA_LIBS Model)
+target_link_libraries(main PUBLIC ${EXTRA_LIBS} tutorial_compiler_flags)
