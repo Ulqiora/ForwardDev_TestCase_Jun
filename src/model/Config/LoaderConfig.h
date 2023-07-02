@@ -7,6 +7,7 @@ class LoaderConfig : public ILoaderConfig{
     public:
     [[nodiscard]] bool load(std::basic_istream<char>& stream) override final;
     const EngineInfo& getResult() const override final;
+    virtual ~LoaderConfig(){}
     private:
     EngineInfo info_;
 };

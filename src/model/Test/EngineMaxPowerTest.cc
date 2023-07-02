@@ -26,5 +26,5 @@ void EngineMaxPowerTest::VisitModelEngineForward(ModelEngineForward* engine){
 }
 
 void EngineMaxPowerTest::printResult(double maxPower, double speed){
-    std::cout<<"Max power = "<<maxPower<<"kW, then Speed of engine = "<<speed<<"rad/s.";
+    std::cout<<"Max power = "<<maxPower<<"kW, then Speed of engine = "<<speed<<"rad/s.\n";
 }
