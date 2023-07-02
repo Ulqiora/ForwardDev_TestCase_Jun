@@ -2,6 +2,11 @@
 #include "../Controller/Controller.h"
 class View{
     public:
+    View() = delete;
+    View(View&&) = delete;
+    View(const View&) = delete;
+    View& operator=(View&&) = delete;
+    View& operator=(const View&) = delete;
     View(ControllerView* c) : controller_(c){}
     void show();
     private:

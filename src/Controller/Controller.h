@@ -3,7 +3,7 @@
 #include "../model/ModelEngineForward.h"
 #include "../model/Test/EngineHeatingTest.h"
 #include "../model/Test/EngineMaxPowerTest.h"
-enum class Test { HEATING, MAX_POWER };
+enum class Test { HEATING = 1, MAX_POWER = 2 };
 
 class ControllerView {
    public:
