@@ -1,15 +1,15 @@
 #pragma once
-class TestVisitor;
 
-class IModelEngine{
-    public:
-    virtual void accept(TestVisitor* visitor) = 0;
-    double getCurrTemp() const {return currentTemp_;}
-    double getRotationSpeed() const {return rotationSpeed_;}
-    void setRotationSpeed(double speed) {rotationSpeed_ = speed;}
-    void setCurrTemp(double temperature = 20.0) { currentTemp_ = temperature; }
-    virtual ~IModelEngine() = default;
-   private:
-    double currentTemp_;
-    double rotationSpeed_;
+class IModelEngine {
+public:
+	virtual void start() = 0;
+	virtual void setSimulationStep(double step) = 0;
+	virtual void calcNextStep() = 0;
+	virtual double getPower() const = 0;
+	virtual double getRotationSpeed() const = 0;
+	virtual double getAcceleration() const = 0;
+	virtual double getTemperature() const = 0;
+	virtual void setAmbientTemperature(double temperature) = 0;
+	virtual bool overheated() const = 0;
+	virtual ~IModelEngine() = default;
 };

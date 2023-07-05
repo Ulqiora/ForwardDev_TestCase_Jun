@@ -1,25 +1,14 @@
 #pragma once
 
-#include "TestVisitor.h"
+#include "Test.h"
 class ModelEngineForward;
 
-class EngineHeatingTest : public TestVisitor {
-    
+class EngineHeatingTest : public Test {
     public:
-
     EngineHeatingTest(double);
-    EngineHeatingTest() = default;
-    EngineHeatingTest(EngineHeatingTest&& ) = default;
-    EngineHeatingTest(const EngineHeatingTest&) = default;
-    EngineHeatingTest& operator=(EngineHeatingTest&&) = default;
-    EngineHeatingTest& operator=(const EngineHeatingTest&) = default;
     virtual ~EngineHeatingTest(){}
-
-    virtual void VisitModelEngineForward(ModelEngineForward* engine) override;
-
+    virtual void start(IModelEngine* engine) override;
     private:
-
     void printResult(unsigned long seconds);
-
     double ambientTemp_;
 };

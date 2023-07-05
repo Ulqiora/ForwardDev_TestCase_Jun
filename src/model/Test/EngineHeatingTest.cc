@@ -8,26 +8,16 @@
 
 EngineHeatingTest::EngineHeatingTest(double val) : ambientTemp_(val) {}
 
-void EngineHeatingTest::VisitModelEngineForward(ModelEngineForward* engine) {
-    engine->setCurrTemp(ambientTemp_);
-    engine->setRotationSpeed(0.0);
-    std::chrono::seconds seconds(0);
-    double torque, acceleration, coolingSpeed, heatingSpeed;
-    while (std::fabs(engine->getCurrTemp() - engine->getPickTemp()) > 1e-3 &&
-           engine->getCurrTemp() < engine->getPickTemp()) {
-        torque = engine->getMotorTorque();
-        acceleration = torque / engine->getMotorInertia();
-        coolingSpeed = engine->getCoolingCoefficient() *
-                            (ambientTemp_ - engine->getCurrTemp());
-        heatingSpeed =
-            torque * engine->getHm() +
-            std::pow(engine->getRotationSpeed(), 2.0) * engine->getHv();
-        engine->setCurrTemp(engine->getCurrTemp() + coolingSpeed +
-                            heatingSpeed);
-        engine->setRotationSpeed(engine->getRotationSpeed() + acceleration);
-        seconds++;
+void EngineHeatingTest::start(IModelEngine* engine) {
+    unsigned long  count = 0.0;
+    engine->setAmbientTemperature(ambientTemp_);
+    engine->setSimulationStep(1.0);
+    engine->start();
+    while (!engine->overheated()) {
+        engine->calcNextStep();
+        count++;
     }
-    printResult(seconds.count());
+    printResult(count);
 }
 
 void EngineHeatingTest::printResult(unsigned long seconds){

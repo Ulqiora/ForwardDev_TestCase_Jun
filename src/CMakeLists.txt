@@ -15,7 +15,7 @@ target_compile_options(tutorial_compiler_flags INTERFACE
   "$<${gcc_like_cxx}:-Wall;-g;-Wextra;-Wshadow;-Wformat=2;-Wunused>"
   "$<${msvc_cxx}:-W3>"
 )
-add_subdirectory(model)
+add_subdirectory(Model)
 add_subdirectory(Controller)
 add_subdirectory(View)
 # add_library(EXTRA_LIBS STATIC Model Controller View)

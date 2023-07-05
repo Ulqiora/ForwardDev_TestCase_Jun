@@ -1,7 +1,8 @@
 #include "View.h"
 
-#include "../Controller/Controller.h"
+#include <string>
 
+#include "../Controller/Controller.h"
 void View::show() {
     showFileConfigConsole();
     showSetTemperatureConsole();
@@ -28,11 +29,15 @@ void View::showSetTemperatureConsole() {
         std::cin >> temperature;
         try {
             temperature_v = std::stod(temperature,&pos);
-            std::cout<<pos<<"  "<<temperature.size()<<'\n';
+            //std::cout<<pos<<"  "<<temperature.size()<<'\n';
             if(pos == 0 || pos != temperature.size())
-                throw std::invalid_argument("");
+            {
+                std::cin.clear();
+                std::cin.ignore();
+                std::cout << "Error! Retry enter ambient temperature: ";
+            }
             break;
-        } catch (const std::exception& ignore) {
+        } catch (const std::exception&) {
             std::cin.clear();
             std::cin.ignore();
             std::cout << "Error! Retry enter ambient temperature: ";
@@ -49,7 +54,7 @@ void View::showSetTest() {
     while (true) {
         std::cin >> choose_s;
         try {
-            choose = std::stod(choose_s,&pos);
+            choose = (size_t)std::stod(choose_s,&pos);
             std::cout<<pos<<"  "<<choose_s.size()<<'\n';
             if(pos == 0 || pos != choose_s.size())
                 throw std::invalid_argument("Error! Founded incorrect symbols! Retry: ");
@@ -62,6 +67,6 @@ void View::showSetTest() {
             std::cout << e.what();
         }
     }
-    controller_->setTest(static_cast<Test>(choose));
+    controller_->setTest(static_cast<TestType>(choose));
     controller_->startTest();
 }
